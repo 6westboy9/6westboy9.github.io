@@ -50,12 +50,12 @@
   };
 </script>
 
-  <meta name="description" content="1 对象的存活判断1.1 存活判断算法① 引用计数法给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加 1，当引用失效时，计数器值就减 1，任何时刻计数器为 0 的对象就是不可能再被使用的。优点：实现简单，判断效率高。缺点：JVM 里面没有选用引用计数算法来管理内存，其中最主要的原因是它很难解决对象之间相互循环引用的问题。 ② 可达性分析算法（Hotspot JVM 采用的算法）通过一">
+  <meta name="description" content="1 对象的存活判断1.1 存活判断算法① 引用计数法给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加 1，当引用失效时，计数器值就减 1，任何时刻计数器为 0 的对象就是不可能再被使用的。优点：实现简单，判断效率高。缺点：JVM 里面没有选用引用计数算法来管理内存，其中最主要的原因是它很难解决对象之间相互循环引用的问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM-02-垃圾收集器与内存分配策略">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;12&#x2F;JVM-02-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5&#x2F;index.html">
 <meta property="og:site_name" content="Westboy&#39;Blog">
-<meta property="og:description" content="1 对象的存活判断1.1 存活判断算法① 引用计数法给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加 1，当引用失效时，计数器值就减 1，任何时刻计数器为 0 的对象就是不可能再被使用的。优点：实现简单，判断效率高。缺点：JVM 里面没有选用引用计数算法来管理内存，其中最主要的原因是它很难解决对象之间相互循环引用的问题。 ② 可达性分析算法（Hotspot JVM 采用的算法）通过一">
+<meta property="og:description" content="1 对象的存活判断1.1 存活判断算法① 引用计数法给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加 1，当引用失效时，计数器值就减 1，任何时刻计数器为 0 的对象就是不可能再被使用的。优点：实现简单，判断效率高。缺点：JVM 里面没有选用引用计数算法来管理内存，其中最主要的原因是它很难解决对象之间相互循环引用的问题。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;12&#x2F;JVM-02-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5&#x2F;可达性分析算法.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;12&#x2F;JVM-02-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5&#x2F;对象的生死存亡过程.png">
@@ -245,9 +245,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="1-对象的存活判断"><a href="#1-对象的存活判断" class="headerlink" title="1 对象的存活判断"></a>1 对象的存活判断</h1><h2 id="1-1-存活判断算法"><a href="#1-1-存活判断算法" class="headerlink" title="1.1 存活判断算法"></a>1.1 存活判断算法</h2><h3 id="①-引用计数法"><a href="#①-引用计数法" class="headerlink" title="① 引用计数法"></a>① 引用计数法</h3><p>给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加 1，当引用失效时，计数器值就减 1，任何时刻计数器为 0 的对象就是不可能再被使用的。优点：实现简单，判断效率高。缺点：JVM 里面没有选用引用计数算法来管理内存，其中最主要的原因是它很难解决对象之间相互循环引用的问题。</p>
+        <h1 id="1-对象的存活判断"><a href="#1-对象的存活判断" class="headerlink" title="1 对象的存活判断"></a>1 对象的存活判断</h1><h2 id="1-1-存活判断算法"><a href="#1-1-存活判断算法" class="headerlink" title="1.1 存活判断算法"></a>1.1 存活判断算法</h2><h3 id="①-引用计数法"><a href="#①-引用计数法" class="headerlink" title="① 引用计数法"></a>① 引用计数法</h3><p>给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加 1，当引用失效时，计数器值就减 1，任何时刻计数器为 0 的对象就是不可能再被使用的。优点：实现简单，判断效率高。缺点：JVM 里面没有选用引用计数算法来管理内存，其中最主要的原因是它很难解决对象之间相互循环引用的问题。</p><a id="more"></a>
 <h3 id="②-可达性分析算法（Hotspot-JVM-采用的算法）"><a href="#②-可达性分析算法（Hotspot-JVM-采用的算法）" class="headerlink" title="② 可达性分析算法（Hotspot JVM 采用的算法）"></a>② 可达性分析算法（Hotspot JVM 采用的算法）</h3><p>通过一系列称之为 GC Roots 的对象作为起点，从这个节点开始向下搜索，搜索所走过的路径称为引用链（Reference Chain）。当一个对象到 GC Roots 没有任何引用链相连时（用图论的话来说，就是从 GC Roots 到这个对象不可达），则证明此对象是不可用的。</p>
-<img src="./可达性分析算法.png" width="550px"/>
+<img src="./可达性分析算法.png" width="550px">
 
 
 <p><font color="red">在 JVM 中哪些对象可以作为 GC Roots 对象呢？</font></p>
@@ -271,7 +271,7 @@
 <li>将筛选出的对象存放在 F-Queue 中，稍后由虚拟机自动建立的、低优先级的一个后台线程 Finalizer 去执行对象的 finalize 方法，但不承诺等待运行结束，原因是如果有个对象的 finalize 方法执行缓慢或是发生了死循环，可能导致 F-Queue 队列中的其他对象永久处于等待，甚至导致整个内存回收系崩溃。finalize 方法是对象逃脱死亡命运的最后一次机会，稍后 GC 将对 F-Queue 中的对象进行第二次小规模的标记，如果对象在 finalize 方法中重新与引用链上的任何一个对象建立关联，那么在第二次标记时它将被移除出“即将回收”的集合；如果对象这时候还没有逃脱，那么基本上它就真的被回收了。</li>
 </ol>
 <p>执行示意图：</p>
-<img src="./对象的生死存亡过程.png" width="750px"/>
+<img src="./对象的生死存亡过程.png" width="750px">
 
 <div class="note warning">
             <p>注意：任何一个对象的 finalize 方法都只会被系统自动调用一次。</p>
@@ -295,7 +295,7 @@
 <h1 id="2-垃圾收集算法"><a href="#2-垃圾收集算法" class="headerlink" title="2 垃圾收集算法"></a>2 垃圾收集算法</h1><p>主要的算法有三种：① 标记-清除算法，② 复制算法，③ 标记-整理算法，分代收集算法算作是对其三种的组合应用。那么各个算法到底有和优缺点？</p>
 <!-- ![](垃圾收集算法.png) -->
 
-<img src="./垃圾收集算法.png" width="600px"/>
+<img src="./垃圾收集算法.png" width="600px">
 
 <h2 id="2-1-标记-清除算法"><a href="#2-1-标记-清除算法" class="headerlink" title="2.1  标记-清除算法"></a>2.1  标记-清除算法</h2><p>分为“标记”和“清除”两个阶段：首先标记出所有需要回收的对象，在标记完成后统一回收所有被标记的对象，注意顺序：标记-清理。</p>
 <p>优点：相比较复制算法内存利用率高。<br>缺点：① 效率低，标记和清除两个过程的效率都不高；② 空间碎片多，导致后续分配较大对象时，无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作。</p>
@@ -306,7 +306,7 @@
 <h2 id="2-4-分代收集算法"><a href="#2-4-分代收集算法" class="headerlink" title="2.4 分代收集算法"></a>2.4 分代收集算法</h2><p>当前商业虚拟机的垃圾收集都采用“分代收集”算法，这种算法并没有什么新的思想，只是根据对象存活周期的不同将内存划分为几块。一般是把 Java 堆分为新生代和老年代，这样就可以根据各个年代的特点采用最适当的收集算法。<font color="red">在新生代中，每次垃圾收集时都发现有大批对象死去，只有少量存活，那就选用复制算法，只需要付出少量存活对象的复制成本就可以完成收集。在老年代中因为对象存活率高、没有额外空间对它进行分配担保，就必须使用标记-清除或者标记-整理算法来进行回收</font>。</p>
 <p>在 JVM 内存使用模型，大体上就是我们的代码不停的创建对象然后分配在新生代里，但是一般很快那个对象就没人引用了，成了垃圾对象。接着一段时间过后，新生代就满了，此时就会回收掉那些垃圾对象，空出来内存空间，给后续其他的对象来使用。其实绝大多数的对象都是存活周期非常短的对象，可能被创建出来 1 毫秒之后就没人引用了，它就是垃圾对象了。所以可以想象一下，可能一次新生代垃圾回收过后，99% 的对象其实都被垃圾回收了，就 1% 的对象存活了下来，可能就是一些长期存活的对象，或者还没使用完的对象。所以<font color="red">前面理论中的复制算法的缺点：存活对象很少，未能合理分配空间，导致浪费了大量的内存空间</font>。</p>
 <p>所以 HotSpot JVM 实际上做法是把新生代内存区域划分为三块，一块 Eden，两块 Survivor，其中 Eden 区占 80% 内存空间，每一块 Survivor 区各占 10% 内存空间。比例为 8:1，由参数 -XX:SurvivorRatio 控制。<font color="red">具体算法执行过程</font>：刚开始对象都是分配在 Eden 区内，如果 Eden 区满了，就会触发垃圾回收，此时就会把 Eden 区中的存活对象都一次性转移到一块空着的 Survivor 区。接着 Eden 区就会被清空，然后再次分配新对象到 Eden 区里，Eden 区和一块 Survivor 区里是有对象的，其中 Survivor 区里放的是上一次 Young GC 后存活的对象。如果下次再次 Eden 区满，那么再次触发 Young GC，就会把 Eden 区和放着上一次 Young GC 后存活对象的 Survivor 区内的存活对象，转移到另外一块 Survivor 区去。接着新对象继续分配在 Eden 区和另外那块开始被使用的 Survivor 区，然后始终保持一块 Survivor 区是空着的，就这样一直循环使用这三块内存区域。</p>
-<img src="分代收集算法.png" width="400px"/>
+<img src="分代收集算法.png" width="400px">
 
 <p>这么做<font color="red">最大的好处</font>，就是只有 10% 的内存空间是被闲置的，90% 的内存都被使用上了，无论是垃圾回收的性能，内存碎片的控制，还是说内存使用的效率，都非常的好。</p>
 <p><font color="red">老年代的标记-整理算法的速度至少比新生代的复制算法的速度慢 10 倍</font>。如果系统频繁出现老年代的 Old GC 垃圾回收，会导致系统性能被严重影响，出现频繁卡顿的情况。</p>
@@ -315,7 +315,7 @@
           </div>
 
 <h1 id="3-HosSpot-垃圾收集器"><a href="#3-HosSpot-垃圾收集器" class="headerlink" title="3 HosSpot 垃圾收集器"></a>3 HosSpot 垃圾收集器</h1><p>垃圾收集算法为内存回收的方法论，接下来要详述的垃圾收集器就是内存回收的具体实现。不同厂商、不同版本的虚拟机所提供的垃圾收集器都不尽相同，并且一般都会提供参数供用户根据自己的应用特点和要求自由组合出各个年代所使用的收集器。这里主要讨论下 HotSpot 虚拟机下的垃圾收集器：</p>
-<img src="HotSpot垃圾收集器.png" width="600px"/>
+<img src="HotSpot垃圾收集器.png" width="600px">
 
 
 <p>切记：没有十全十美的的收集器，只有最合适的收集器。</p>
@@ -327,7 +327,7 @@
 <p>对于新生代的 Serial 垃圾收集器就是用一个线程进行垃圾对象收集，然后此时暂停系统工作线程，所以一般我们在服务器程序中很少用这种方式。常用的新生代垃圾收集器是 ParNew ，它针对服务器一般都是多核 CPU 做了优化，他是支持多线程个垃圾回收的，可以大幅度提升回收的性能，缩短回收的时间。CMS 使用一套独特的机制尽可能的在垃圾回收的过程中减少 Stop the World 的时间，避免长时间卡死我们的系统。</p>
 <p>接下来分析下各个垃圾收集器的运行机制。</p>
 <h2 id="3-1-Serial-ParNew-与-Serial-Old"><a href="#3-1-Serial-ParNew-与-Serial-Old" class="headerlink" title="3.1 Serial/ParNew 与 Serial Old"></a>3.1 Serial/ParNew 与 Serial Old</h2><p>Serial 与 Serial Old 收集器运行示意图：</p>
-<img src="Serial与ParNew垃圾收集器运行示意图.png" width="580px"/>
+<img src="Serial与ParNew垃圾收集器运行示意图.png" width="580px">
 
 <p>需要说明的是：</p>
 <ol>
@@ -345,15 +345,15 @@
 <li>设置 MaxGCPauseMillis 参数（更关注最大停顿时间）或 GCTimeRatio 参数（更关注吞吐量）给虚拟机设立一个优化目标；</li>
 <li>设置 -XX:+UseAdaptiveSizePolicy 参数，开启自适应调节策略。</li>
 </ol>
-<p>详细内容参见：<a href="">《深入理解 Java 虚拟机：JVM 高级特性与最佳实践》（第二版）</a> 3.5.5 Parallel Scavenge 收集器章节内容。</p>
+<p>详细内容参见：<a href>《深入理解 Java 虚拟机：JVM 高级特性与最佳实践》（第二版）</a> 3.5.5 Parallel Scavenge 收集器章节内容。</p>
 <h2 id="3-3-Parallel-Old"><a href="#3-3-Parallel-Old" class="headerlink" title="3.3 Parallel Old"></a>3.3 Parallel Old</h2><p>在 Parallel Old 之前，新生代的 Parallel Scavenge 收集器一直处于比较尴尬的状态。原因是，如果新生代选择了 Parallel Scavenge 收集器，老年代除了 Serial Old 收集器别无选择。由于老年代 Serial Old 收集器在性能上的拖累，使用 Parallel Scavenge 收集器也未必能在整体应用上获得吞吐量最大化的效果。</p>
 <p>直到 Parallel Old 收集器出现后，“吞吐量优先”收集器终于有了名副其实的应用组合。</p>
 <p>Parallel Scavenge/Parallel Old 收集器运行示意图：</p>
-<img src="ParallelScavenge与ParallelOld收集器运行示意图.png" width="540px"/>
+<img src="ParallelScavenge与ParallelOld收集器运行示意图.png" width="540px">
 
 <h2 id="3-4-CMS【重点】"><a href="#3-4-CMS【重点】" class="headerlink" title="3.4 CMS【重点】"></a>3.4 CMS【重点】</h2><p>CMS 采用标记-清除算法，所以会产生大量的内存碎片， 采用的是垃圾收集线程与系统工作线程尽量同时执行的模式来处理。为什么叫尽量呢？因为在初始标记阶段和重新标记阶段是无法并行运行的。</p>
 <p>CMS 收集器运行示意图：</p>
-<img src="CMS垃圾收集器运行示意图.png" width="650px"/>
+<img src="CMS垃圾收集器运行示意图.png" width="650px">
 
 <h3 id="①-执行阶段"><a href="#①-执行阶段" class="headerlink" title="① 执行阶段"></a>① 执行阶段</h3><p><font color="red">第一阶段：初始标记（很快）</font></p>
 <p>标记出所有 GC Roots 直接引用对象，初始标记阶段会造成 Stop the World，暂停一切工作线程，但是影响不大，因为速度非常，仅仅是标记 GC Roots 直接引用对象而已。</p>
@@ -383,7 +383,7 @@
 <p>为了解决这个问题，CMS 收集器提供了一个 -XX：+UseCMSCompactAtFullCollection 开关参数（默认就是开启的），用于在 Old GC 之后要再次进行 Stop the World，停止工作线程，开启内存碎片的合并整理，由此可见内存整理的过程是无法并发的，空间碎片问题没有了，但停顿时间不得不变长。</p>
 <p>虚拟机设计者还提供了另外一个参数 -XX：CMSFullGCsBeforeCompaction，这个参数是用于设置执行多少次 Old GC 后再执行一次内存整理的工作，默认值为 0，表示每次 Old GC 后都进行一次内存整理。</p>
 <h2 id="3-5-G1【TODO】"><a href="#3-5-G1【TODO】" class="headerlink" title="3.5 G1【TODO】"></a>3.5 G1【TODO】</h2><h1 id="4-内存分配策略"><a href="#4-内存分配策略" class="headerlink" title="4 内存分配策略"></a>4 内存分配策略</h1><p>经典的 JVM 内存分配流程图：</p>
-<p><img src="JVM%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt=""></p>
+<p><img src="JVM%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt></p>
 
     </div>
 
