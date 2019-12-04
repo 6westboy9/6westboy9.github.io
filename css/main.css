@@ -157,8 +157,8 @@ body {
 body {
   background: #eee;
   color: #555;
-  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 13.5px;
+  font-family: 'Menlo', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
   line-height: 1.8;
 }
 @media (max-width: 991px) {
@@ -173,7 +173,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Menlo', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-weight: bold;
   line-height: 1.5;
   margin: 10px 0 10px;
@@ -230,10 +230,11 @@ hr {
   margin: 40px 0;
 }
 blockquote {
-  border-left: 4px solid #ddd;
+  border-left: 4px solid;
   color: #666;
+  background-color: #dcdcdc;
   margin: 0;
-  padding: 0 15px;
+  padding: 0 5px;
 }
 blockquote cite::before {
   content: '-';
@@ -405,7 +406,7 @@ pre,
 }
 pre,
 code {
-  font-family: consolas, Menlo, monospace, "PingFang SC", "Microsoft YaHei";
+  font-family: 'Menlo', consolas, Menlo, monospace, "PingFang SC", "Microsoft YaHei";
 }
 code {
   background: #eee;
@@ -433,6 +434,7 @@ pre code {
   border: 0;
   margin: 0;
   padding: 10px 0;
+  font-size: 1em;
 }
 .highlight table {
   border: 0;
@@ -989,7 +991,7 @@ pre .javascript .function {
 }
 .site-title {
   display: inline-block;
-  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Menlo', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 1.375em;
   font-weight: normal;
   line-height: 1.5;
@@ -1065,7 +1067,7 @@ pre .javascript .function {
 .menu-item span.exturl {
   border-bottom: 0;
   display: block;
-  font-size: 13.5px;
+  font-size: 14px;
   transition-property: border-color;
   transition-delay: 0s;
   transition-duration: 0.2s;
@@ -1178,7 +1180,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #4b30ba;
+  background: #da98ee;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1214,11 +1216,11 @@ pre .javascript .function {
   color: #fff;
 }
 .links-of-blogroll {
-  font-size: 13.5px;
+  font-size: 14px;
   margin-top: 10px;
 }
 .links-of-blogroll-title {
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 600;
   margin-top: 0;
 }
@@ -1347,7 +1349,7 @@ pre .javascript .function {
   white-space: nowrap;
 }
 .post-toc .nav .nav-child {
-  display: none;
+  display: block;
 }
 .post-toc .nav .active > .nav-child {
   display: block;
@@ -1529,11 +1531,11 @@ pre .javascript .function {
 .post-body {
   overflow-wrap: break-word;
   word-wrap: break-word;
-  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Menlo', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 @media (min-width: 1200px) {
   .post-body {
-    font-size: 13.5px;
+    font-size: 14px;
   }
 }
 .post-body span.exturl .fa {
@@ -1562,16 +1564,21 @@ pre .javascript .function {
 .post-body ul a {
   color: #0593d3;
   border-bottom: none;
-  border-bottom: 0px thick #0593d3;
 }
 .post-body ul a:hover {
   color: #fc6423;
   border-bottom: none;
-  border-bottom: 0px thick #fc6423;
+}
+.post-body ol a {
+  color: #0593d3;
+  border-bottom: none;
+}
+.post-body ol a:hover {
+  color: #fc6423;
+  border-bottom: none;
 }
 code {
   padding: 2px 4px;
-  font-size: 90%;
   color: #c7254e;
   background-color: #f9f2f4;
   border-radius: 4px;
@@ -1865,12 +1872,12 @@ code {
   visibility: visible;
 }
 .posts-expand .post-title-link .fa {
-  font-size: 13.5px;
+  font-size: 14px;
   margin-left: 5px;
 }
 .posts-expand .post-meta {
   color: #999;
-  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Menlo', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 0.75em;
   margin: 3px 0 60px 0;
   text-align: center;
@@ -2013,6 +2020,7 @@ code {
   margin-top: 20px;
 }
 .category-all-page .category-list {
+  font-family: Source Code Pro;
   margin: 0;
   padding: 0;
 }
@@ -2349,19 +2357,6 @@ ul.breadcrumb li + li:last-child {
 .menu .menu-item span.exturl:hover {
   background: #f5f5f5;
 }
-.menu-item-active a::after,
-.menu .menu-item a:hover::after,
-.menu .menu-item span.exturl:hover::after {
-  background: #bbb;
-  border-radius: 50%;
-  content: ' ';
-  height: 6px;
-  margin-top: -3px;
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  width: 6px;
-}
 .menu .menu-item {
   display: block;
   margin: 0;
@@ -2400,10 +2395,6 @@ ul.breadcrumb li + li:last-child {
 .sub-menu .menu-item span.exturl:hover {
   background: initial;
   color: #fc6423;
-}
-.sub-menu .menu-item a::after,
-.sub-menu .menu-item span.exturl::after {
-  content: initial !important;
 }
 .sub-menu .menu-item-active a {
   background: #fff;

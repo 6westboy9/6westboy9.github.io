@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="/css/main.css?v=7.4.2">
 
-
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
@@ -52,7 +52,7 @@
 
   <meta name="description" content="1 对象的存活判断1.1 存活判断算法① 引用计数法给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加 1，当引用失效时，计数器值就减 1，任何时刻计数器为 0 的对象就是不可能再被使用的。优点：实现简单，判断效率高。缺点：JVM 里面没有选用引用计数算法来管理内存，其中最主要的原因是它很难解决对象之间相互循环引用的问题。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JVM-02-垃圾收集器与内存分配策略">
+<meta property="og:title" content="JVM-02 垃圾收集器与内存分配策略">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;12&#x2F;JVM-02-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5&#x2F;index.html">
 <meta property="og:site_name" content="Westboy&#39;Blog">
 <meta property="og:description" content="1 对象的存活判断1.1 存活判断算法① 引用计数法给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加 1，当引用失效时，计数器值就减 1，任何时刻计数器为 0 的对象就是不可能再被使用的。优点：实现简单，判断效率高。缺点：JVM 里面没有选用引用计数算法来管理内存，其中最主要的原因是它很难解决对象之间相互循环引用的问题。">
@@ -66,7 +66,7 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;12&#x2F;JVM-02-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5&#x2F;ParallelScavenge与ParallelOld收集器运行示意图.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;12&#x2F;JVM-02-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5&#x2F;CMS垃圾收集器运行示意图.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;12&#x2F;JVM-02-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5&#x2F;JVM%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%B5%81%E7%A8%8B%E5%9B%BE.png">
-<meta property="og:updated_time" content="2019-11-27T10:57:47.128Z">
+<meta property="og:updated_time" content="2019-12-04T09:42:19.358Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;12&#x2F;JVM-02-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5&#x2F;可达性分析算法.png">
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title>JVM-02-垃圾收集器与内存分配策略 | Westboy'Blog</title>
+  <title>JVM-02 垃圾收集器与内存分配策略 | Westboy'Blog</title>
   
 
 
@@ -156,12 +156,12 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">3</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">8</span></a>
 
   </li>
   </ul>
@@ -194,7 +194,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="王鹏博">
+      <meta itemprop="name" content="西域男孩">
       <meta itemprop="description" content="">
     </span>
 
@@ -203,7 +203,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          JVM-02-垃圾收集器与内存分配策略
+          JVM-02 垃圾收集器与内存分配策略
         </h1>
 
         <div class="post-meta">
@@ -220,7 +220,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-27 18:57:47" itemprop="dateModified" datetime="2019-11-27T18:57:47+08:00">2019-11-27</time>
+                <time title="修改时间：2019-12-04 17:42:19" itemprop="dateModified" datetime="2019-12-04T17:42:19+08:00">2019-12-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,25 +273,22 @@
 <p>执行示意图：</p>
 <img src="./对象的生死存亡过程.png" width="750px">
 
-<div class="note warning">
-            <p>注意：任何一个对象的 finalize 方法都只会被系统自动调用一次。</p>
-          </div>
-
+<blockquote>
+<p>注意：任何一个对象的 finalize 方法都只会被系统自动调用一次。</p>
+</blockquote>
 <p>验证示例代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 此代码演示了两点：</span></span><br><span class="line"><span class="comment">* 1. 对象可以在被 GC 时自我拯救</span></span><br><span class="line"><span class="comment">* 2. 这种自救的机会只有一次，因为一个对象的 finalize 方法最多只能被系统自动调用一次</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FinalizeDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> FinalizeDemo Hook = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> finalize <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="keyword">super</span>.finalize;</span><br><span class="line">        System.out.println(<span class="string">"执行 finalize 方法"</span>);</span><br><span class="line">        FinalizeDemo.Hook = <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        Hook = <span class="keyword">new</span> FinalizeDemo;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 对象第一次拯救</span></span><br><span class="line">        Hook = <span class="keyword">null</span>;</span><br><span class="line">        System.gc;</span><br><span class="line">        <span class="comment">// 因为 finalize 方法优先级很低，所以暂停 0.5 秒以等待执行对象的 finalize 方法</span></span><br><span class="line">        Thread.sleep(<span class="number">500</span>);</span><br><span class="line">        <span class="keyword">if</span> (Hook != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"我还活着"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"我已经死了"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 对象第二次拯救，与上面代码完全一样</span></span><br><span class="line">        Hook = <span class="keyword">null</span>;</span><br><span class="line">        System.gc;</span><br><span class="line">        <span class="comment">// 因为 finalize 方法优先级很低，所以暂停 0.5 秒以等待执行对象的 finalize 方法，但是已经执行过一次，这次不会再执行</span></span><br><span class="line">        Thread.sleep(<span class="number">500</span>);</span><br><span class="line">        <span class="keyword">if</span> (Hook != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"我还活着"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"我已经死了"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>执行结果：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">执行 finalize 方法</span><br><span class="line">我还活着</span><br><span class="line">我已经死了</span><br></pre></td></tr></table></figure>
 
 <p><font color="red">不鼓励使用 finalize 方法</font>，因为它不是 C/C++ 中的析构函数，而 Java 刚诞生时为了使 C/C++ 程序员更容易接受它所做出的妥协。它的运行代价高昂，不确定性大，无法保证各个对象调用的顺序。有些教材中描述它适合做关闭外部资源之类的工作，这完全是对这个方法用途的一种自我安慰。<font color="red">finalize 能做的工作，使用 try-finally 或者其他方法都可以做得更好的、更及时</font>。</p>
-<h2 id="1-4-方法区的垃圾回收"><a href="#1-4-方法区的垃圾回收" class="headerlink" title="1.4 方法区的垃圾回收"></a>1.4 方法区的垃圾回收</h2><p>JVM 中方法区的垃圾收集主要回收两部分内容：<font color="red">废弃常量和无用的类</font>。</p>
+<h2 id="1-4-方法区的垃圾回收"><a href="#1-4-方法区的垃圾回收" class="headerlink" title="1.4 方法区的垃圾回收"></a>1.4 方法区的垃圾回收</h2><blockquote>
+<p>在此我们讨论的范围仅限于 Java 8 版本之前方法区实现为 Hotspot 虚拟机中的永久代，对于 Java 8 版本及之后的版本变更后续补充。</p>
+</blockquote>
+<p>JVM 中方法区的垃圾收集主要回收两部分内容：<font color="red">废弃常量和无用的类</font>。</p>
 <p><font color="red">判断是否是废弃常量</font>：没有任何对象指向该常量。例如一个字符串 “abc” 已经进入了常量池中，但是当前系统没有一个 String 对象叫做 “abc” 的，那么这个 “abc” 其实已经没有任何一个对象引用了。常量池中的其他类（接口）、方法、字段的符号引用也与此类似。</p>
 <p><font color="red">判断是否是无用的类（三个条件）</font>：① 该类所有实例都已经被回收，也就是 Java 堆中不存在该类的任何实例。② 加载该类的 ClassLoader 已经被回收。③ 该类对应的 java.lang.Class 对象没有在任何地方被引用，无法在任何地方通过反射访问该类的方法。</p>
 <p>JVM 可以对满足以上三个条件的无用类进行回收，这里说的仅仅是可以，而不是和对象一样，不使用了就必然会回收。是否对类进行回收 HotSpot 虚拟机提供了 -Xnoclassgc 参数进行控制，还可以使用 -verbos:class 以及 -XX:+TraceClassLoading 和 -XX:+TraceClassUnLoading 查看类加载和卸载信息。在大量使用反射、动态代理、CGLIB 等 ByteCode 框架、动态生成 JSP 以及 OSGi 这类频繁自定义 ClassLoader 的场景都需要虚拟机具备类卸载的功能，以保证永久代不会溢出。</p>
-<div class="note warning">
-            <p>在此我们讨论的范围仅限于 Java 8 版本之前方法区实现为 Hotspot 虚拟机中的永久代，对于 Java 8 版本及之后的版本变更后续补充。</p>
-          </div>
-
-
 <h1 id="2-垃圾收集算法"><a href="#2-垃圾收集算法" class="headerlink" title="2 垃圾收集算法"></a>2 垃圾收集算法</h1><p>主要的算法有三种：① 标记-清除算法，② 复制算法，③ 标记-整理算法，分代收集算法算作是对其三种的组合应用。那么各个算法到底有和优缺点？</p>
 <!-- ![](垃圾收集算法.png) -->
 
@@ -310,10 +307,9 @@
 
 <p>这么做<font color="red">最大的好处</font>，就是只有 10% 的内存空间是被闲置的，90% 的内存都被使用上了，无论是垃圾回收的性能，内存碎片的控制，还是说内存使用的效率，都非常的好。</p>
 <p><font color="red">老年代的标记-整理算法的速度至少比新生代的复制算法的速度慢 10 倍</font>。如果系统频繁出现老年代的 Old GC 垃圾回收，会导致系统性能被严重影响，出现频繁卡顿的情况。</p>
-<div class="note warning">
-            <p>所谓 JVM 优化，就是尽可能让对象都在新生代里分配和回收，尽量别让太多对象频繁进入老年代，避免频繁对老年代进行垃圾回收，同时给系统充足的内存大小，避免新生代频繁的进行垃圾回收。</p>
-          </div>
-
+<blockquote>
+<p>所谓 JVM 优化，就是尽可能让对象都在新生代里分配和回收，尽量别让太多对象频繁进入老年代，避免频繁对老年代进行垃圾回收，同时给系统充足的内存大小，避免新生代频繁的进行垃圾回收。</p>
+</blockquote>
 <h1 id="3-HosSpot-垃圾收集器"><a href="#3-HosSpot-垃圾收集器" class="headerlink" title="3 HosSpot 垃圾收集器"></a>3 HosSpot 垃圾收集器</h1><p>垃圾收集算法为内存回收的方法论，接下来要详述的垃圾收集器就是内存回收的具体实现。不同厂商、不同版本的虚拟机所提供的垃圾收集器都不尽相同，并且一般都会提供参数供用户根据自己的应用特点和要求自由组合出各个年代所使用的收集器。这里主要讨论下 HotSpot 虚拟机下的垃圾收集器：</p>
 <img src="HotSpot垃圾收集器.png" width="600px">
 
@@ -397,16 +393,16 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/10/28/JVM-01-%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F/" rel="next" title="JVM-01-内存区域">
-                  <i class="fa fa-chevron-left"></i> JVM-01-内存区域
+                <a href="/2019/10/28/JVM-01-%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F/" rel="next" title="JVM-01 内存区域">
+                  <i class="fa fa-chevron-left"></i> JVM-01 内存区域
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/11/12/Tomcat-%E5%A4%9A%E7%A7%8D%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88/" rel="prev" title="Tomcat-多种部署方案">
-                  Tomcat-多种部署方案 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/11/12/Tomcat-%E5%A4%9A%E7%A7%8D%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88/" rel="prev" title="Tomcat 多种部署方案">
+                  Tomcat 多种部署方案 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -452,9 +448,9 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <img class="site-author-image" itemprop="image" alt="王鹏博"
+  <img class="site-author-image" itemprop="image" alt="西域男孩"
     src="/images/avatar.gif">
-  <p class="site-author-name" itemprop="name">王鹏博</p>
+  <p class="site-author-name" itemprop="name">西域男孩</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -498,13 +494,8 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">王鹏博</span>
+  <span class="author" itemprop="copyrightHolder">西域男孩</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.2
-  </div>
 
         
 

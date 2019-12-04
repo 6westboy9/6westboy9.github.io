@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="/css/main.css?v=7.4.2">
 
-
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
@@ -52,7 +52,7 @@
 
   <meta name="description" content="1 默认配置文件基于 Tomcat 8.5.46 的 conf 目录下的 server.xml 配置文件：conf&#x2F;server.xml 去除掉注释信息后文件内容1234567891011121314151617181920212223242526272829303132333435&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&amp;lt;Server por">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tomcat-多种部署方案">
+<meta property="og:title" content="Tomcat 多种部署方案">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;12&#x2F;Tomcat-%E5%A4%9A%E7%A7%8D%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88&#x2F;index.html">
 <meta property="og:site_name" content="Westboy&#39;Blog">
 <meta property="og:description" content="1 默认配置文件基于 Tomcat 8.5.46 的 conf 目录下的 server.xml 配置文件：conf&#x2F;server.xml 去除掉注释信息后文件内容1234567891011121314151617181920212223242526272829303132333435&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&amp;lt;Server por">
@@ -64,7 +64,7 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;12&#x2F;Tomcat-%E5%A4%9A%E7%A7%8D%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88&#x2F;Tomcat的架构图.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;12&#x2F;Tomcat-%E5%A4%9A%E7%A7%8D%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88&#x2F;一个Tomcat实例两个应用部署方案.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;12&#x2F;Tomcat-%E5%A4%9A%E7%A7%8D%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88&#x2F;SpringBoot内嵌服务猜想.png">
-<meta property="og:updated_time" content="2019-11-27T10:58:07.083Z">
+<meta property="og:updated_time" content="2019-12-04T08:18:18.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;12&#x2F;Tomcat-%E5%A4%9A%E7%A7%8D%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88&#x2F;2-Tomcat配置.png">
 
@@ -82,7 +82,7 @@
   };
 </script>
 
-  <title>Tomcat-多种部署方案 | Westboy'Blog</title>
+  <title>Tomcat 多种部署方案 | Westboy'Blog</title>
   
 
 
@@ -154,12 +154,12 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">3</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">8</span></a>
 
   </li>
   </ul>
@@ -192,7 +192,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="王鹏博">
+      <meta itemprop="name" content="西域男孩">
       <meta itemprop="description" content="">
     </span>
 
@@ -201,7 +201,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Tomcat-多种部署方案
+          Tomcat 多种部署方案
         </h1>
 
         <div class="post-meta">
@@ -218,7 +218,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-27 18:58:07" itemprop="dateModified" datetime="2019-11-27T18:58:07+08:00">2019-11-27</time>
+                <time title="修改时间：2019-12-04 16:18:18" itemprop="dateModified" datetime="2019-12-04T16:18:18+08:00">2019-12-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -226,8 +226,8 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-%E5%AE%B9%E5%99%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">Web 容器</span>
+                  <a href="/categories/Web-Container/" itemprop="url" rel="index">
+                    <span itemprop="name">Web Container</span>
                   </a>
                 </span>
             </span>
@@ -275,7 +275,7 @@
 <p>那么如果我有两个应用需要部署，只有一个 Tomcat 实例，那么根据 Tomcat 的架构设计图以下三种部署方案：</p>
 <img src="一个Tomcat实例两个应用部署方案.png" width="800px">
 
-<p>其中方案一的比较简单，方案二可以参考<a href="#3-不同域名指向同一主机上的不同项目">不同域名指向同一主机上的不同项目</a>，方案三可以参考：<a href="https://my.oschina.net/lzwenme/blog/229035" target="_blank" rel="noopener">Tomcat 配置多个 Service，多个同名的应用运行在一个 tomcat 下</a>，至于部署的是相通应用还是不同应用无关紧要。</p>
+<p>其中方案一的比较简单，方案二可以参考“<a href="#3-不同域名指向同一主机上的不同项目">不同域名指向同一主机上的不同项目</a>”，方案三可以参考“<a href="https://my.oschina.net/lzwenme/blog/229035" target="_blank" rel="noopener">Tomcat 配置多个 Service，多个同名的应用运行在一个 tomcat 下</a>”，至于部署的是相通应用还是不同应用无关紧要。</p>
 <p>当然随着分布式服务的流行，Tomcat 都是内嵌于 SpringBoot 应用中的，所以目前对于 SpringBoot 中关于 Tomcat 的架构流程猜想如下。</p>
 <img src="SpringBoot内嵌服务猜想.png" width="750px">
 
@@ -293,16 +293,16 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/11/12/JVM-02-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/" rel="next" title="JVM-02-垃圾收集器与内存分配策略">
-                  <i class="fa fa-chevron-left"></i> JVM-02-垃圾收集器与内存分配策略
+                <a href="/2019/11/12/JVM-02-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/" rel="next" title="JVM-02 垃圾收集器与内存分配策略">
+                  <i class="fa fa-chevron-left"></i> JVM-02 垃圾收集器与内存分配策略
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/11/26/JVM-03-%E7%B1%BB%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" rel="prev" title="JVM-03-类文件结构">
-                  JVM-03-类文件结构 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/11/26/JVM-03-%E7%B1%BB%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" rel="prev" title="JVM-03 类文件结构">
+                  JVM-03 类文件结构 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -348,9 +348,9 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <img class="site-author-image" itemprop="image" alt="王鹏博"
+  <img class="site-author-image" itemprop="image" alt="西域男孩"
     src="/images/avatar.gif">
-  <p class="site-author-name" itemprop="name">王鹏博</p>
+  <p class="site-author-name" itemprop="name">西域男孩</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -394,13 +394,8 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">王鹏博</span>
+  <span class="author" itemprop="copyrightHolder">西域男孩</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.2
-  </div>
 
         
 

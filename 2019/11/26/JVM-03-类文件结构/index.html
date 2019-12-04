@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="/css/main.css?v=7.4.2">
 
-
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
@@ -52,7 +52,7 @@
 
   <meta name="description" content="Class 文件是一组以 8 字节为基础单位的二进制流，各个数据项目严格按照顺序紧凑地排列在 Class 文件之中，中间没有添加任何分隔符。在 Java 虚拟机规范的规定，Class 文件格式采用一种类似 C 语言结构体的伪结构来存储数据，这种伪结构只有两种数据类型：无符号数和表。无符号数属于基本的数据类型，以 u1、u2、u4、u8 来分别代表 1 个字节、2 个字节、4 个字节、8 个字节的无">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JVM-03-类文件结构">
+<meta property="og:title" content="JVM-03 类文件结构">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;26&#x2F;JVM-03-%E7%B1%BB%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84&#x2F;index.html">
 <meta property="og:site_name" content="Westboy&#39;Blog">
 <meta property="og:description" content="Class 文件是一组以 8 字节为基础单位的二进制流，各个数据项目严格按照顺序紧凑地排列在 Class 文件之中，中间没有添加任何分隔符。在 Java 虚拟机规范的规定，Class 文件格式采用一种类似 C 语言结构体的伪结构来存储数据，这种伪结构只有两种数据类型：无符号数和表。无符号数属于基本的数据类型，以 u1、u2、u4、u8 来分别代表 1 个字节、2 个字节、4 个字节、8 个字节的无">
@@ -72,7 +72,7 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;26&#x2F;JVM-03-%E7%B1%BB%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84&#x2F;十六进制文件.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;26&#x2F;JVM-03-%E7%B1%BB%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84&#x2F;案例分析-1.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;26&#x2F;JVM-03-%E7%B1%BB%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84&#x2F;案例分析-2.png">
-<meta property="og:updated_time" content="2019-11-27T10:59:56.012Z">
+<meta property="og:updated_time" content="2019-12-04T09:44:11.787Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;26&#x2F;JVM-03-%E7%B1%BB%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84&#x2F;案例1.png">
 
@@ -90,7 +90,7 @@
   };
 </script>
 
-  <title>JVM-03-类文件结构 | Westboy'Blog</title>
+  <title>JVM-03 类文件结构 | Westboy'Blog</title>
   
 
 
@@ -162,12 +162,12 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">3</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">8</span></a>
 
   </li>
   </ul>
@@ -200,7 +200,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="王鹏博">
+      <meta itemprop="name" content="西域男孩">
       <meta itemprop="description" content="">
     </span>
 
@@ -209,7 +209,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          JVM-03-类文件结构
+          JVM-03 类文件结构
         </h1>
 
         <div class="post-meta">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-27 18:59:56" itemprop="dateModified" datetime="2019-11-27T18:59:56+08:00">2019-11-27</time>
+                <time title="修改时间：2019-12-04 17:44:11" itemprop="dateModified" datetime="2019-12-04T17:44:11+08:00">2019-12-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -258,10 +258,9 @@
 <h1 id="1-魔数与-Class-文件版本"><a href="#1-魔数与-Class-文件版本" class="headerlink" title="1 魔数与 Class 文件版本"></a>1 魔数与 Class 文件版本</h1><p>刚开始 4 个字节为魔数，魔数之后的 4 个字节为版本信息。</p>
 <!-- <img src="案例1.png" width="850px"/> -->
 
-<h1 id="2-常量池"><a href="#2-常量池" class="headerlink" title="2 常量池"></a>2 常量池</h1><div class="note warning">
-            <p><font color="red">注意常量池存储的并不都全是不变的量</font>。一个 Java 类中定义的很多信息都是由常量池来维护和描述的，因此可以将常量池看作是 class 文件的资源仓库，比如 Java 类中定义的方法与变量信息，都是存储在常量池中。</p>
-          </div>
-
+<h1 id="2-常量池"><a href="#2-常量池" class="headerlink" title="2 常量池"></a>2 常量池</h1><blockquote>
+<p><font color="red">注意常量池存储的并不都全是不变的量</font>。一个 Java 类中定义的很多信息都是由常量池来维护和描述的，因此可以将常量池看作是 class 文件的资源仓库，比如 Java 类中定义的方法与变量信息，都是存储在常量池中。</p>
+</blockquote>
 <p>主要存放两大类常量：<font color="red">字面量</font>和<font color="red">符号引用</font>。字面量比较接近于 Java 语言层面的常量概念，如文本字符串、声明为 final 的常量值等。而符号引用则属于编译原理方面的概念，包括了下面三类常量：</p>
 <ol>
 <li>类和接口的全限定名；</li>
@@ -334,7 +333,7 @@
 <p>对于每个属性，它的名称需要从常量池中引用一个 CONSTANT_Utf8_info 类型的常量来表示，而<font color="red">属性值的结构则是完全自定义的</font>，只需要通过一个 u4 的长度属性去说明属性值所占用的位数即可。</p>
 <h2 id="7-1-Code-属性"><a href="#7-1-Code-属性" class="headerlink" title="7.1 Code 属性"></a>7.1 Code 属性</h2><p>Code 属性的作用是保存该方法的结构。但<font color="red">并非所有的方法表都必须存在这个属性</font>，譬如接口或者抽象类中的方法就不存在 Code 属性。</p>
 <p>Code 属性表结构：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Code_attribute &#123;</span><br><span class="line">    u2 attribute_name_index;                     # 属性名称索引，指向  CONSTANT_Utf8_info 类型常量的索引，常量固定值为 Code</span><br><span class="line">    u4 attribute_length;                         # 属性值的长度，由于属性名称索引与属性长度一共为 6 字节，所以属性值长度固定为整个属性表长度 - 6</span><br><span class="line">    u2 max_stack;                                # 代表操作数栈深度的最大值，虚拟机运行时需要根据这个值来分配栈帧中的操作栈深度                      </span><br><span class="line">    u2 max_locals;                               # 代表局部变量所需要的存储空间，单位是 Slot，对于 byte、char、float、int、short、boolean 和 returnAddress 等</span><br><span class="line">                                                 # 长度不超过 32 位的数据类型，每个局部变量占用 1 个 Slot，而 double 和 long 这两种 64 位数据类型则需要两个 Slot 来存放</span><br><span class="line">    u4 code_length;                              # 字节码长度，理论最大值可以达到 2^32-1，但是虚拟机规范明确规定不允许超过 65535 条字节指令，即实际只使用了 u2 长度</span><br><span class="line">    u1 code[code_length];                        # 存储字节码指令的一系列字节流，每个指令就是一个 u1 类型的单字节</span><br><span class="line">    u2 exception_table_length;                   #</span><br><span class="line">    &#123;   u2 start_pc;                             #</span><br><span class="line">        u2 end_pc;                               #</span><br><span class="line">        u2 handler_pc;                           #</span><br><span class="line">        u2 catch_type;                           #</span><br><span class="line">    &#125; exception_table[exception_table_length];   # 异常处理表集合，当字节码在 [start_pc, end_pc) 出现类型为 catch_type 或者子类的异常，则转到 handler_pc 进行处理</span><br><span class="line">    u2 attributes_count;                         #</span><br><span class="line">    attribute_info attributes[attributes_count]; #</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Code_attribute &#123;</span><br><span class="line">    u2 attribute_name_index;                     # 属性名称索引，指向  CONSTANT_Utf8_info 类型常量的索引，常量固定值为 Code</span><br><span class="line">    u4 attribute_length;                         # 属性值的长度，由于属性名称索引与属性长度一共为 6 字节，所以属性值长度固定为整个属性表长度 - 6</span><br><span class="line">    u2 max_stack;                                # 代表操作数栈深度的最大值，虚拟机运行时需要根据这个值来分配栈帧中的操作栈深度                      </span><br><span class="line">    u2 max_locals;                               # 代表局部变量所需要的存储空间，单位是 Slot，对于 byte、char、float、int、short、boolean 和 returnAddress 等</span><br><span class="line">                                                 # 长度不超过 32 位的数据类型，每个局部变量占用 1 个 Slot，而 double 和 long 这两种 64 位数据类型则需要两个 Slot 来存放</span><br><span class="line">    u4 code_length;                              # 字节码长度，理论最大值可以达到 2^32-1，但是虚拟机规范明确规定不允许超过 65535 条字节指令，即实际只使用了 u2 长度</span><br><span class="line">    u1 code[code_length];                        # 存储字节码指令的一系列字节流，每个指令就是一个 u1 类型的单字节</span><br><span class="line">    u2 exception_table_length;                   #</span><br><span class="line">    &#123;   u2 start_pc;                             # 表示在 code 数组中从 start_pc 到 end_pc 处（包含 start_pc，不包含 end_pc）的指令</span><br><span class="line">        u2 end_pc;                               # 抛出的异常会由这个表项来处理</span><br><span class="line">        u2 handler_pc;                           # 表示处理异常的代码的开始处</span><br><span class="line">        u2 catch_type;                           # 表示会被处理的异常类型，它指向常量池里的一个异常类，当值为 0 时，表示处理所有异常</span><br><span class="line">    &#125; exception_table[exception_table_length];   # 异常处理表集合，当字节码在 [start_pc, end_pc) 出现类型为 catch_type 或者子类的异常，则转到 handler_pc 进行处理</span><br><span class="line">    u2 attributes_count;                         #</span><br><span class="line">    attribute_info attributes[attributes_count]; #</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="7-2-Exceptions-属性"><a href="#7-2-Exceptions-属性" class="headerlink" title="7.2 Exceptions 属性"></a>7.2 Exceptions 属性</h2><p>Exceptions 属性是在方法表中与 Code 属性平级的一项属性，<font color="red">注意不要与 Code 属性中的异常表产生混淆</font>。Exceptions 属性的作用是列举出方法中可能抛出的受检查异常，也就是方法描述时在 throws 关键字后面列举的异常。</p>
 <p>Exceptions 属性表结构：</p>
@@ -388,7 +387,7 @@
 <p>查看编译后的二进制文件，可以通过 Hex Fiend 软件将二进制转换成十六进制，方便后续分析。</p>
 <img src="十六进制文件.png" width="850px">
 
-<p>再通过 javap -verbose 命令反解析信息：</p>
+<p>再通过 javap -verbose 命令反解析信息（如果存在 private 修饰符修饰方法时使用需在 -verbose 后添加 -p 参数）：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"># javap -verbose target/classes/com/westboy/bytecode/MyTest1.class</span><br><span class="line">Classfile /Users/westboy/IdeaProjects/personal/java-learning/shengsiyuan-jvm/target/classes/com/westboy/bytecode/MyTest1.class</span><br><span class="line">  Last modified 2019-11-24; size 487 bytes</span><br><span class="line">  MD5 checksum d4d9ee601106058691f328f370e8cc59</span><br><span class="line">  Compiled from &quot;MyTest1.java&quot;</span><br><span class="line">public class com.westboy.bytecode.MyTest1</span><br><span class="line">  minor version: 0</span><br><span class="line">  major version: 52</span><br><span class="line">  flags: ACC_PUBLIC, ACC_SUPER</span><br><span class="line">Constant pool:</span><br><span class="line">   #1 = Methodref          #4.#20         // java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">   #2 = Fieldref           #3.#21         // com/westboy/bytecode/MyTest1.a:I</span><br><span class="line">   #3 = Class              #22            // com/westboy/bytecode/MyTest1</span><br><span class="line">   #4 = Class              #23            // java/lang/Object</span><br><span class="line">   #5 = Utf8               a</span><br><span class="line">   #6 = Utf8               I</span><br><span class="line">   #7 = Utf8               &lt;init&gt;</span><br><span class="line">   #8 = Utf8               ()V</span><br><span class="line">   #9 = Utf8               Code</span><br><span class="line">  #10 = Utf8               LineNumberTable</span><br><span class="line">  #11 = Utf8               LocalVariableTable</span><br><span class="line">  #12 = Utf8               this</span><br><span class="line">  #13 = Utf8               Lcom/westboy/bytecode/MyTest1;</span><br><span class="line">  #14 = Utf8               getA</span><br><span class="line">  #15 = Utf8               ()I</span><br><span class="line">  #16 = Utf8               setA</span><br><span class="line">  #17 = Utf8               (I)V</span><br><span class="line">  #18 = Utf8               SourceFile</span><br><span class="line">  #19 = Utf8               MyTest1.java</span><br><span class="line">  #20 = NameAndType        #7:#8          // &quot;&lt;init&gt;&quot;:()V</span><br><span class="line">  #21 = NameAndType        #5:#6          // a:I</span><br><span class="line">  #22 = Utf8               com/westboy/bytecode/MyTest1</span><br><span class="line">  #23 = Utf8               java/lang/Object</span><br><span class="line">&#123;</span><br><span class="line">  public com.westboy.bytecode.MyTest1();</span><br><span class="line">    descriptor: ()V</span><br><span class="line">    flags: ACC_PUBLIC</span><br><span class="line">    Code:</span><br><span class="line">      stack=2, locals=1, args_size=1</span><br><span class="line">         0: aload_0</span><br><span class="line">         1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">         4: aload_0</span><br><span class="line">         5: iconst_1</span><br><span class="line">         6: putfield      #2                  // Field a:I</span><br><span class="line">         9: return</span><br><span class="line">      LineNumberTable:</span><br><span class="line">        line 7: 0</span><br><span class="line">        line 9: 4</span><br><span class="line">      LocalVariableTable:</span><br><span class="line">        Start  Length  Slot  Name   Signature</span><br><span class="line">            0      10     0  this   Lcom/westboy/bytecode/MyTest1;</span><br><span class="line"></span><br><span class="line">  public int getA();</span><br><span class="line">    descriptor: ()I</span><br><span class="line">    flags: ACC_PUBLIC</span><br><span class="line">    Code:</span><br><span class="line">      stack=1, locals=1, args_size=1</span><br><span class="line">         0: aload_0</span><br><span class="line">         1: getfield      #2                  // Field a:I</span><br><span class="line">         4: ireturn</span><br><span class="line">      LineNumberTable:</span><br><span class="line">        line 12: 0</span><br><span class="line">      LocalVariableTable:</span><br><span class="line">        Start  Length  Slot  Name   Signature</span><br><span class="line">            0       5     0  this   Lcom/westboy/bytecode/MyTest1;</span><br><span class="line"></span><br><span class="line">  public void setA(int);</span><br><span class="line">    descriptor: (I)V</span><br><span class="line">    flags: ACC_PUBLIC</span><br><span class="line">    Code:</span><br><span class="line">      stack=2, locals=2, args_size=2</span><br><span class="line">         0: aload_0</span><br><span class="line">         1: iload_1</span><br><span class="line">         2: putfield      #2                  // Field a:I</span><br><span class="line">         5: return</span><br><span class="line">      LineNumberTable:</span><br><span class="line">        line 16: 0</span><br><span class="line">        line 17: 5</span><br><span class="line">      LocalVariableTable:</span><br><span class="line">        Start  Length  Slot  Name   Signature</span><br><span class="line">            0       6     0  this   Lcom/westboy/bytecode/MyTest1;</span><br><span class="line">            0       6     1     a   I</span><br><span class="line">&#125;</span><br><span class="line">SourceFile: &quot;MyTest1.java&quot;</span><br></pre></td></tr></table></figure>
 
 <p>接下来，我们将逐步分析这个反解析过程，看下这些二进制文件怎么映射到上述反解析的结果。</p>
@@ -396,15 +395,15 @@
 <img src="案例分析-1.png" width="1000px">
 
 <p>需要注意的是：</p>
-<ul>
+<ol>
 <li>从上图可以观察到占据 Class 文件空间最多的就是常量池与方法表。</li>
 <li>常量池表集合实际大小 = constant_pool_count-1。</li>
 <li>所有访问标志（类或接口的访问标志、方法的访问标志，字段的访问标志）均取它们组合的 &amp; 操作，比如：此示例中的类访问标志为 0X0021，根据访问标志的 &amp; 操作可以推到出该类的访问修饰符为 ACC_PUBLIC(0X0001) 与 ACC_SUPER(0X0020) 组合。</li>
 <li>如果当前表的集合大小为 0 时，后续是没有任何表信息相关的内容，紧挨着的是下一个无符号数或者表。</li>
-</ul>
-<h1 id="8-3-常量池分析"><a href="#8-3-常量池分析" class="headerlink" title="8.3 常量池分析"></a>8.3 常量池分析</h1><img src="案例分析-2.png" width="1000px">
+</ol>
+<h2 id="8-3-常量池分析"><a href="#8-3-常量池分析" class="headerlink" title="8.3 常量池分析"></a>8.3 常量池分析</h2><img src="案例分析-2.png" width="1000px">
 
-<h2 id="8-4-方法表分析"><a href="#8-4-方法表分析" class="headerlink" title="8.4 方法表分析"></a>8.4 方法表分析</h2>
+<h2 id="8-4-方法表分析-TODO"><a href="#8-4-方法表分析-TODO" class="headerlink" title="8.4 方法表分析 TODO"></a>8.4 方法表分析 TODO</h2>
     </div>
 
     
@@ -417,16 +416,16 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/11/12/Tomcat-%E5%A4%9A%E7%A7%8D%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88/" rel="next" title="Tomcat-多种部署方案">
-                  <i class="fa fa-chevron-left"></i> Tomcat-多种部署方案
+                <a href="/2019/11/12/Tomcat-%E5%A4%9A%E7%A7%8D%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88/" rel="next" title="Tomcat 多种部署方案">
+                  <i class="fa fa-chevron-left"></i> Tomcat 多种部署方案
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/11/26/JVM-04-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/" rel="prev" title="JVM-04-虚拟机类加载机制">
-                  JVM-04-虚拟机类加载机制 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/11/26/JVM-04-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/" rel="prev" title="JVM-04 虚拟机类加载机制">
+                  JVM-04 虚拟机类加载机制 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -466,15 +465,15 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-魔数与-Class-文件版本"><span class="nav-text">1 魔数与 Class 文件版本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-常量池"><span class="nav-text">2 常量池</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-访问标志"><span class="nav-text">3 访问标志</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-类索引、父类索引与接口索引集合"><span class="nav-text">4 类索引、父类索引与接口索引集合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-字段表集合"><span class="nav-text">5 字段表集合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-方法表集合"><span class="nav-text">6 方法表集合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-属性表集合"><span class="nav-text">7 属性表集合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-Code-属性"><span class="nav-text">7.1 Code 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-Exceptions-属性"><span class="nav-text">7.2 Exceptions 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3-LineNumberTable-属性"><span class="nav-text">7.3 LineNumberTable 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-4-LocalVariableTable-属性"><span class="nav-text">7.4 LocalVariableTable 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-5-SourceFile-属性"><span class="nav-text">7.5 SourceFile 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-6-ConstantValue-属性"><span class="nav-text">7.6 ConstantValue 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-7-InnerClasses-属性"><span class="nav-text">7.7 InnerClasses 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-8-Deprecated-及-Synthetic-属性"><span class="nav-text">7.8 Deprecated 及 Synthetic 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-9-StackMapTable-属性"><span class="nav-text">7.9 StackMapTable 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-10-Signature-属性"><span class="nav-text">7.10 Signature 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-11-BootstrapMethods-属性"><span class="nav-text">7.11 BootstrapMethods 属性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-案例分析"><span class="nav-text">8 案例分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-准备"><span class="nav-text">8.1 准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-总体结构"><span class="nav-text">8.2 总体结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-3-常量池分析"><span class="nav-text">8.3 常量池分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-4-方法表分析"><span class="nav-text">8.4 方法表分析</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-魔数与-Class-文件版本"><span class="nav-text">1 魔数与 Class 文件版本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-常量池"><span class="nav-text">2 常量池</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-访问标志"><span class="nav-text">3 访问标志</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-类索引、父类索引与接口索引集合"><span class="nav-text">4 类索引、父类索引与接口索引集合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-字段表集合"><span class="nav-text">5 字段表集合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-方法表集合"><span class="nav-text">6 方法表集合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-属性表集合"><span class="nav-text">7 属性表集合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-Code-属性"><span class="nav-text">7.1 Code 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-Exceptions-属性"><span class="nav-text">7.2 Exceptions 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3-LineNumberTable-属性"><span class="nav-text">7.3 LineNumberTable 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-4-LocalVariableTable-属性"><span class="nav-text">7.4 LocalVariableTable 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-5-SourceFile-属性"><span class="nav-text">7.5 SourceFile 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-6-ConstantValue-属性"><span class="nav-text">7.6 ConstantValue 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-7-InnerClasses-属性"><span class="nav-text">7.7 InnerClasses 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-8-Deprecated-及-Synthetic-属性"><span class="nav-text">7.8 Deprecated 及 Synthetic 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-9-StackMapTable-属性"><span class="nav-text">7.9 StackMapTable 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-10-Signature-属性"><span class="nav-text">7.10 Signature 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-11-BootstrapMethods-属性"><span class="nav-text">7.11 BootstrapMethods 属性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-案例分析"><span class="nav-text">8 案例分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-准备"><span class="nav-text">8.1 准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-总体结构"><span class="nav-text">8.2 总体结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-常量池分析"><span class="nav-text">8.3 常量池分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-4-方法表分析-TODO"><span class="nav-text">8.4 方法表分析 TODO</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <img class="site-author-image" itemprop="image" alt="王鹏博"
+  <img class="site-author-image" itemprop="image" alt="西域男孩"
     src="/images/avatar.gif">
-  <p class="site-author-name" itemprop="name">王鹏博</p>
+  <p class="site-author-name" itemprop="name">西域男孩</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -518,13 +517,8 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">王鹏博</span>
+  <span class="author" itemprop="copyrightHolder">西域男孩</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.2
-  </div>
 
         
 
