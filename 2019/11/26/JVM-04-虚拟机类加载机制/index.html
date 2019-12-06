@@ -188,8 +188,8 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/26/JVM-04-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="西域男孩">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
     </span>
 
@@ -647,6 +647,7 @@
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
         </div>
           
@@ -677,9 +678,9 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <img class="site-author-image" itemprop="image" alt="西域男孩"
-    src="/images/avatar.gif">
-  <p class="site-author-name" itemprop="name">西域男孩</p>
+  <img class="site-author-image" itemprop="image" alt=""
+    src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name"></p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -723,7 +724,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">西域男孩</span>
+  <span class="author" itemprop="copyrightHolder"></span>
 </div>
 
         
@@ -778,6 +779,24 @@
   
 
   
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: 'a88a7fec0cb71cf96b48',
+      clientSecret: '8ce000ec32bcf09e9847d4022ac122440d346f17',
+      repo: 'blog-issue',
+      owner: '6westboy9',
+      admin: ['6westboy9'],
+      id: '769cd0a0fb4c987d2edf2ab40150efbd',
+        language: '',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
 
 </body>
 </html>
